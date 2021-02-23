@@ -6,20 +6,20 @@
 </head>
 
 <body>
-<video class="vjs-default-skin" controls preload="auto" width="640" height="268" id="video"></video>
+<video class="vjs-default-skin" controls preload="auto" width="640" height="268" id="video1"></video>
 <script>
-  const videoUrlPrefix = "/transcribe.output.conygre.com/";
+  var videoUrlPrefix = "/wx-video-translation/";
   
   // AMEND THIS TO BE YOUR VIDEO FILE
   // german example
   //let videoFolderAndm3Filename = "translate__en-GB__de";
   // italian example
-  let videoFolderAndm3Filename = "nickspeaking__en-GB__it";
-
-  let finalPath = videoUrlPrefix + videoFolderAndm3Filename + "/" + videoFolderAndm3Filename + ".m3u8";
+  let videoFolderAndm3Filename = "nickspeaking__en-GB__es";
+  // videoUrlPrefix +
+  let finalPath =  videoFolderAndm3Filename + "/" + videoFolderAndm3Filename + ".m3u8";
 
   if(Hls.isSupported()) {
-    var video = document.getElementById('video');
+    var video = document.getElementById('video1');
     var hls = new Hls();
     hls.loadSource(finalPath);
     hls.attachMedia(video);
@@ -37,14 +37,57 @@
     });
   }
 
-function play() {
+function play1() {
     video.play();
 }
 
 </script>
 
-<button onClick="play()">Play</button>
+<button onClick="play1()">Play</button>
 
 </body>
 
+
+
+<body>
+<video class="vjs-default-skin" controls preload="auto" width="640" height="268" id="video2"></video>
+<script>
+  var videoUrlPrefix = "/wx-video-translation/";
+  
+  // AMEND THIS TO BE YOUR VIDEO FILE
+  // german example
+  //let videoFolderAndm3Filename = "translate__en-GB__de";
+  // italian example
+  var videoFolderAndm3Filename2 = "nickspeaking__en-GB__fr";
+  // videoUrlPrefix +
+  var finalPath2 =  videoFolderAndm3Filename2 + "/" + videoFolderAndm3Filename2 + ".m3u8";
+
+  if(Hls.isSupported()) {
+    var video = document.getElementById('video2');
+    var hls = new Hls();
+    hls.loadSource(finalPath2);
+    hls.attachMedia(video);
+    hls.on(Hls.Events.MANIFEST_PARSED,function() {
+      video.play();
+  });
+ }
+ // hls.js is not supported on platforms that do not have Media Source Extensions (MSE) enabled.
+ // When the browser has built-in HLS support (check using `canPlayType`), we can provide an HLS manifest (i.e. .m3u8 URL) directly to the video element throught the `src` property.
+ // This is using the built-in support of the plain video element, without using hls.js.
+  else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+    video.src = finalPath;
+    video.addEventListener('canplay',function() {
+      //video.play();
+    });
+  }
+
+function play2() {
+    video.play();
+}
+
+</script>
+
+<button onClick="play2()">Play</button>
+
+</body>
 </html>

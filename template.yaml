@@ -10,12 +10,12 @@ Globals:
     Environment:
       # Currently these are only used by final Lambda. However, they can all be amended to use these variables
       Variables:
-        SOURCE_VIDEO_BUCKET: transcribe.input.conygre.com
-        TRANSCRIBED_TEXT_BUCKET: transcribe.json.conygre.com
-        TRANSLATED_SUBTITLES_BUCKET: transcribe.srt.conygre.com
-        SSML_BUCKET: transcribe.ssml.conygre.com
-        POLLY_AUDIO_BUCKET: transcribe.audio.conygre.com
-        FINAL_OUTPUT_BUCKET: transcribe.output.conygre.com
+        SOURCE_VIDEO_BUCKET: wx-video-translation
+        TRANSCRIBED_TEXT_BUCKET: wx-video-translation
+        TRANSLATED_SUBTITLES_BUCKET: wx-video-translation
+        SSML_BUCKET: wx-video-translation
+        POLLY_AUDIO_BUCKET: wx-video-translation
+        FINAL_OUTPUT_BUCKET: wx-video-translation
 
 Resources:
   VideoTranslaterStateMachine:
@@ -52,8 +52,8 @@ Resources:
       Runtime: python3.8
       Environment:
         Variables:
-          OUTPUT_BUCKET: transcribe.json.conygre.com
-          INPUT_BUCKET: transcribe.input.conygre.com
+          OUTPUT_BUCKET: wx-video-translation
+          INPUT_BUCKET: wx-video-translation
       Policies: !Sub "arn:aws:iam::${AWS::AccountId}:policy/S3_Transcribe_Policy"
 
   TranslateAndSubtitleFunction:
@@ -64,8 +64,8 @@ Resources:
       Runtime: python3.8
       Environment:
         Variables:
-          OUTPUT_BUCKET: transcribe.srt.conygre.com
-          INPUT_BUCKET: transcribe.json.conygre.com
+          OUTPUT_BUCKET: wx-video-translation
+          INPUT_BUCKET: wx-video-translation
       Policies: !Sub "arn:aws:iam::${AWS::AccountId}:policy/S3_Transcribe_Policy"
 
   SSMLFunction:
@@ -76,8 +76,8 @@ Resources:
       Runtime: python3.8
       Environment:
         Variables:
-          OUTPUT_BUCKET: transcribe.ssml.conygre.com
-          INPUT_BUCKET: transcribe.srt.conygre.com
+          OUTPUT_BUCKET: wx-video-translation
+          INPUT_BUCKET: wx-video-translation
       Policies: !Sub "arn:aws:iam::${AWS::AccountId}:policy/S3_Transcribe_Policy"
 
   SSMLToPollyFunction:
@@ -88,8 +88,8 @@ Resources:
       Runtime: python3.8
       Environment:
         Variables:
-          OUTPUT_BUCKET: transcribe.audio.conygre.com
-          INPUT_BUCKET: transcribe.ssml.conygre.com
+          OUTPUT_BUCKET: wx-video-translation
+          INPUT_BUCKET: wx-video-translation
       Policies: !Sub "arn:aws:iam::${AWS::AccountId}:policy/S3_Transcribe_Policy"
 
   MediaConvertFunction:
@@ -107,3 +107,4 @@ Outputs:
     Description: "Video Transcoder State Machine"
     Value: !Ref VideoTranslaterStateMachine
   
+ 
