@@ -28,7 +28,7 @@ exports.handler = function(event, context, callback) {
 
 
     // Set the custom endpoint for your account
-    AWS.config.mediaconvert = {endpoint : 'https://vasjpylpa.mediaconvert.us-east-1.amazonaws.com'};
+    AWS.config.mediaconvert = {endpoint : 'https://wvttkmhib.mediaconvert.ap-southeast-2.amazonaws.com'};
     
     let audioInputFile = "s3://" + pollyBucket + "/"+audioInputFileName;
     let masterVideoFile = "s3://" + originalVideoBucket + "/"+originalVideoFilename+".mp4";
@@ -310,8 +310,8 @@ exports.handler = function(event, context, callback) {
             }
           ]
         },
-        "Queue": "arn:aws:mediaconvert:us-east-1:963778699255:queues/Default",
-        "Role": "arn:aws:iam::963778699255:role/MediaConvertRoleAWSDefined"
+        "Queue": "arn:aws:mediaconvert:ap-southeast-2:827978678406:queues/Default",
+        "Role": "arn:aws:iam::827978678406:role/MediaConvertRoleAWSDefined"
       }
       
       new AWS.MediaConvert({apiVersion: '2017-08-29'}).createJob(mediaConvertParams, function (err,data) {
